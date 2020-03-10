@@ -4,8 +4,8 @@ import Job from "./Job";
 
 export default function Jobs({jobs}) {
   return(
-    <div className={'job-list'}>
-      <Typography variant={"h1"}>
+    <div className="jobs">
+      <Typography variant="h1">
         Entry Level Software Jobs
       </Typography>
       {
