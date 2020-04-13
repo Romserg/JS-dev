@@ -13,6 +13,7 @@ async function fetchGithub() {
   let onPage = 0;
   const allJobs = [];
 
+  // fetch all pages
   while (resultCount > 0) {
     const result = await fetch(`${baseURL}?page=${onPage}`);
     const jobs = await result.json();
@@ -22,9 +23,26 @@ async function fetchGithub() {
     onPage++;
   }
 
-  // set in redis
   console.log('got', allJobs.length, 'total jobs');
-  const success = await setAsync('github', JSON.stringify(allJobs));
+
+  // filter jobs
+  const juniorJobs = allJobs.filter(job => {
+    const jobTitle = job.title.toLowerCase();
+
+    return !(jobTitle.includes('senior') ||
+      jobTitle.includes('manager') ||
+      jobTitle.includes('sr.') ||
+      jobTitle.includes('architect') ||
+      jobTitle.includes('team-lead') ||
+      jobTitle.includes('vice-president') ||
+      jobTitle.includes('director') ||
+      jobTitle.includes('tech lead'));
+  });
+
+  console.log('filtered down to', juniorJobs.length);
+
+  // set in redis
+  const success = await setAsync('github', JSON.stringify(juniorJobs));
 
   console.log({success});
 }
