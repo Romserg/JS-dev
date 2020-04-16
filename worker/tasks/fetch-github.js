@@ -15,12 +15,17 @@ async function fetchGithub() {
 
   // fetch all pages
   while (resultCount > 0) {
-    const result = await fetch(`${baseURL}?page=${onPage}`);
-    const jobs = await result.json();
-    resultCount = jobs.length;
-    allJobs.push(...jobs);
-    console.log('got', resultCount, 'jobs from page', onPage);
-    onPage++;
+    try {
+      const result = await fetch(`${baseURL}?page=${onPage}`);
+      const jobs = await result.json();
+      resultCount = jobs.length;
+      allJobs.push(...jobs);
+      console.log('got', resultCount, 'jobs from page', onPage);
+      onPage++;
+    }
+    catch (e) {
+      console.log(e)
+    }
   }
 
   console.log('got', allJobs.length, 'total jobs');
@@ -35,6 +40,7 @@ async function fetchGithub() {
       jobTitle.includes('architect') ||
       jobTitle.includes('team-lead') ||
       jobTitle.includes('team lead') ||
+      jobTitle.includes('lead') ||
       jobTitle.includes('vice-president') ||
       jobTitle.includes('director') ||
       jobTitle.includes('tech lead'));
