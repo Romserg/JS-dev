@@ -20,6 +20,10 @@ export default function Jobs({jobs}) {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  const isVisible = {
+    display: numPages ? 'flex' : 'none'
+  };
+
   console.log('job is', jobs[0]);
 
   return(
@@ -28,17 +32,18 @@ export default function Jobs({jobs}) {
         Entry Level Software Jobs
       </Typography>
       <Typography variant="h6" component="h2">
-        Found {numJobs} Jobs
+        {numJobs === 0 ? 'Jobs not found' : 'Found {numJobs} Jobs'}
       </Typography>
       {
         jobs.map(
           job => <Job job={job} />
         )
       }
-      <div>
+      <div style={isVisible}>
         Page {activeStep + 1} of {numPages}
       </div>
       <MobileStepper
+        style={isVisible}
         variant="progress"
         steps={numPages}
         position="static"
