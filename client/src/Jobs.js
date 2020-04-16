@@ -49,7 +49,7 @@ export default function Jobs({jobs}) {
         position="static"
         activeStep={activeStep}
         nextButton={
-          <Button size="small" onClick={handleNext} disabled={activeStep === 5}>
+          <Button size="small" onClick={handleNext} disabled={activeStep === numPages-1}>
             Next
             <KeyboardArrowRight />
           </Button>
