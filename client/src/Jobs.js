@@ -32,7 +32,7 @@ export default function Jobs({jobs}) {
         Entry Level Software Jobs
       </Typography>
       <Typography variant="h6" component="h2">
-        {numJobs === 0 ? 'Jobs not found' : 'Found {numJobs} Jobs'}
+        {numJobs === 0 ? 'Jobs not found' : `Found ${numJobs} Jobs`}
       </Typography>
       {
         jobs.map(
