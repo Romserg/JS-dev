@@ -12,6 +12,8 @@ export default function Jobs({jobs}) {
 
   const [activeStep, setActiveStep] = React.useState(0);
 
+  const jobsOnPage = jobs.slice(activeStep * 25, (activeStep * 25) + 25);
+
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -35,7 +37,7 @@ export default function Jobs({jobs}) {
         {numJobs === 0 ? 'Jobs not found' : `Found ${numJobs} Jobs`}
       </Typography>
       {
-        jobs.map(
+        jobsOnPage.map(
           (job, i) => <Job key={i} job={job} />
         )
       }
@@ -49,14 +51,14 @@ export default function Jobs({jobs}) {
         position="static"
         activeStep={activeStep}
         nextButton={
-          <Button size="small" onClick={handleNext} disabled={activeStep === numPages-1}>
+          <Button size="small" onClick={handleNext} disabled={activeStep === numPages - 1}>
             Next
-            <KeyboardArrowRight />
+            <KeyboardArrowRight/>
           </Button>
         }
         backButton={
           <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-            <KeyboardArrowLeft />
+            <KeyboardArrowLeft/>
             Back
           </Button>
         }
