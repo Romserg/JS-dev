@@ -39,8 +39,6 @@ export default function Jobs({jobs}) {
     display: numPages ? 'flex' : 'none'
   };
 
-  console.log('job is', jobs[0]);
-
   return(
     <div className="jobs">
       <JobModal open={open} job={selectedJob} handleClose={handleClose}/>
